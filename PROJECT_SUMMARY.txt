@@ -1,0 +1,64 @@
+========================================================
+NEXUS AI RESUME INTELLIGENCE - PROJECT HANDOVER SUMMARY
+========================================================
+
+>>> AGENT INSTRUCTIONS <<<
+You are an autonomous AI Agent assisting the user with this repository. 
+The user does not know how to code or deploy applications. Your task is to execute the following steps AUTOMATICALLY on behalf of the user using your terminal command tools. Do not ask the user to type commands; execute them yourself.
+
+1. CONTEXT: WHY THE ORIGINAL PROJECT WAS REPLACED
+--------------------------------------------------------
+The original Python/Streamlit repository ("AI-Resume-Analyzer") was technically deprecated and fundamentally broken on modern systems. As an AI Agent, you should NOT attempt to fix the old code. We have deleted the reliance on the old stack for the following reasons:
+
+- SPACY INCOMPATIBILITY: The project required Spacy v2.3.5, which is no longer compatible with modern Python environments (3.11+) without massive hacks.
+- BROKEN LIBRARIES: It relied on 'pyresparser', which is an unmaintained library that hardcodes outdated Spacy models and throws 'TypeError: add() takes exactly 2 positional arguments' due to API changes in Spacy 3.
+- ENVIRONMENT FRAGILITY: The old project required complex local setups, C++ build tools for Spacy, and specific database (MySQL) configurations that made it impossible for non-technical users to run.
+
+NEW ARCHITECTURE (NEXUS AI):
+We have built "Nexus AI" as a 100% modern, robust replacement.
+- TECH STACK: Next.js 14 (App Router), React 19, Tailwind CSS 4.
+- ANALYSIS ENGINE: A custom, high-accuracy ATS scoring engine that evaluates resumes based on:
+    * Quantifiable Impact (Number of metrics/percentages)
+    * Professional Action Verbs
+    * HR Red Flags (Personal pronoun detection)
+    * Keyword Density (12-15 targeted hard skills)
+    * Structural Integrity (Education, Experience, Summary sections)
+- EXTRACTION: High-stability PDF parsing using 'pdf-parse-fork'.
+- PORTABILITY: Runs on any machine with Node.js; no complex database or Python setup required.
+
+2. RUN LOCAL SERVER (IF REQUESTED)
+--------------------------------------------------------
+If the user asks to see the app running locally, execute:
+> cmd /c npm install
+> cmd /c npm run dev
+Then tell the user to navigate to http://localhost:3000.
+
+3. AUTOMATIC GITHUB & NETLIFY DEPLOYMENT (MANDATORY TASK)
+--------------------------------------------------------
+If the user asks you to "push to git" or "make it live", execute these steps autonomously:
+
+STEP A: INITIALIZE GIT
+Execute the following commands in the `nexus-ai` directory to initialize the local repository:
+> cmd /c git init
+> cmd /c git add .
+> cmd /c git commit -m "Initial Nexus AI Commit (Next.js Rewrite)"
+
+STEP B: PUSH TO GITHUB
+1. Ask the user to provide an empty GitHub repository URL (e.g., https://github.com/username/repo.git).
+2. Once provided, execute:
+> cmd /c git branch -M main
+> cmd /c git remote add origin <URL>
+> cmd /c git push -u origin main
+
+STEP C: DEPLOY TO NETLIFY
+To put the site live on the internet, you will use the Netlify CLI.
+Execute:
+> cmd /c npx netlify-cli deploy --prod
+
+*IMPORTANT AGENT NOTE*: Running the netlify deploy command will likely prompt the user for browser authentication. You must instruct the user to:
+1. Click the authorization link that appears in the terminal output.
+2. Select "Create & configure a new site" if prompted in the CLI.
+3. Use the default team and leave the site name blank.
+Monitor the command status and assist the user through the interactive prompts via standard input tools if necessary.
+
+Once the command completes, extract the "Website Draft URL" or "Live URL" from the terminal output and present it to the user so they can access their live site.
